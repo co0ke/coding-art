@@ -17,10 +17,12 @@ const sketch = ({ context, width, height }) => {
 
   const agents = [];
 
-  for (let i = 0; i < 40; i++) {
-    const x = random.range(width*0.15, width*0.85);
-    const y = random.range(height*0.15, height * 0.85);
-    const radius = random.range(1, 10);
+  for (let i = 0; i < 300; i++) {
+    // const x = random.range(width*0.15, width*0.85);
+    // const y = random.range(height*0.15, height * 0.85);
+    const x = random.range(0, width);
+    const y = random.range(0, height);
+    const radius = random.range(1, 5);
     agents.push(new Agent(x, y, radius));
   }
 
@@ -28,24 +30,20 @@ const sketch = ({ context, width, height }) => {
     // context.fillStyle = 'rgba(255,0,0, 0)'; // transparent background
     context.fillStyle = '#fff';
     context.fillRect(0, 0, width, height);
-    context.lineWidth = 0.8;
+    context.lineWidth = 0.02;
+    context.strokeStyle = 'grey';
 
-    let gradient = context.createLinearGradient(0, 0, width, 0);
-    gradient.addColorStop("0", "magenta");
-    gradient.addColorStop("0.5" ,"blue");
-    gradient.addColorStop("1", "#9f5555");
-    context.strokeStyle = gradient;
+    // let gradient = context.createLinearGradient(0, 0, width, 0);
+    // gradient.addColorStop("0", "magenta");
+    // gradient.addColorStop("0.5" ,"blue");
+    // gradient.addColorStop("1", "#9f5555");
+    // context.strokeStyle = gradient;
 
     for(let i = 0; i < agents.length; i++) {
       const agent = agents[i];
 
-      for(let j = i + 1; j < agents.length; j++) {
+      for(let j = 0; j < agents.length; j++) {
         const other = agents[j];
-
-        const dist = agent.pos.getDistance(other.pos);
-        if(dist > 200) {
-          continue;
-        }
 
         context.beginPath();
         context.moveTo(agent.pos.x, agent.pos.y);
@@ -68,12 +66,6 @@ class Vector {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-  }
-
-  getDistance(v) {
-    const dx = this.x - v.x;
-    const dy = this.y - v.y;
-    return Math.sqrt(dx * dx + dy * dy);
   }
 }
 
