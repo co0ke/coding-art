@@ -3,7 +3,7 @@ const random = require('canvas-sketch-util/random');
 
 const settings = {
   dimensions: [ 1080, 1080 ],
-  animate: false
+  animate: true
 };
 
 // const animate = () => {
